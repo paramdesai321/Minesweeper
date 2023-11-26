@@ -1,5 +1,36 @@
 # include <stdio.h>
 # include <string.h>
+# include <stdlib.h>
+
+struct cell{
+
+	int position;
+	int adjcount;
+	int mined;
+	int flagged;
+	int covered;
+
+};
+typedef struct cell cell; // alias for struct cell as "cell"
+
+cell **board; // 2-D array
+int rows;
+int cols;
+int mines;
+
+
+void command_new(){
+
+	
+
+}
+
+void command_show(){
+
+}
+
+
+
 int runtime(){
 
 	char line[80];
@@ -28,9 +59,14 @@ int runtime(){
 		printf("name command = %s\n", tokens[0]);
 
 		if(strcmp(tokens[0],"quit") == 0) break;
-		if(strcmp(tokens[0],"new")==0) printf("New Board command\n");
-		if(strcmp(tokens[0],"show")==0) printf("Show Board command\n");
-		
+		if(strcmp(tokens[0],"new")==0){
+		rows = atoi(tokens[1]);
+		cols = atoi(tokens[2]);	
+		mines= atoi(tokens[3]);
+		 command_new();
+		}
+		if(strcmp(tokens[0],"show")==0) command_show();
+
 
 
 	}
