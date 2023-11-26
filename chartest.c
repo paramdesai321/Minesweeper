@@ -47,5 +47,21 @@ int main(void){
     }
 
 
+    // 2d Arrays
+
+    char tokens[5][20]; // max number of rows it can have is 5, and max number of colums(or you can see it as the length of string) is 20
+
+    strcpy(tokens[0],"abc");
+    strcpy(tokens[1],"a longer string");
+    strcpy(tokens[2],"!!!! XXXXX YYYY");
+    strcpy(tokens[3],"another string");
+    strcpy(tokens[4],"final string");
+
+    for(int i=0;i<5;i++){
+    	printf("row %d string= %s\n",i,tokens[i]);
+
+    }
+
+
     return 0;
 }
