@@ -14,7 +14,19 @@ int runtime(){
 		line[strlen(line)-1] = '\0';
 		printf("You entered %s\n",line);
 
+		strcpy(linecopy,line);
+		tok = strtok(linecopy," ");
+		tokencount=0;
+		while(tok != NULL){
+			printf("current token = %s\n",tok);
+			tok = strtok(NULL," ");
+			tokencount++;
+
+		}
+		printf("Total tokens %d\n",tokencount);
+
 	}
+
 
 	return 0;
 }
