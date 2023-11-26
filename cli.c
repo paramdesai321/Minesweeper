@@ -18,12 +18,20 @@ int runtime(){
 		tok = strtok(linecopy," ");
 		tokencount=0;
 		while(tok != NULL){
-			printf("current token = %s\n",tok);
+			strcpy(tokens[tokencount],tok);
+		//	printf("current token = %s\n",tok);
 			tok = strtok(NULL," ");
 			tokencount++;
 
 		}
 		printf("Total tokens %d\n",tokencount);
+		printf("name command = %s\n", tokens[0]);
+
+		if(strcmp(tokens[0],"quit") == 0) break;
+		if(strcmp(tokens[0],"new")==0) printf("New Board command\n");
+		if(strcmp(tokens[0],"show")==0) printf("Show Board command\n");
+		
+
 
 	}
 
@@ -34,4 +42,5 @@ int runtime(){
 int main(void){
 
 	runtime();
+
 }
