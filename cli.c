@@ -30,18 +30,25 @@ void command_new(){
 	for(int i=0;i<rows;i++){
 		for(int j=0;j<cols;j++){
 
-			board[i][j].position = i*rows+ j ;	
+			board[i][j].position = i*rows+ j;
 		}
 	}
 }
 
 void display_cell(cell *cell){
 
-	printf("%2d",cell->position); // if refer to fields by '.' when we don't have pointers but we use '->' for refering through fields by pointers
+	printf("%4d",cell->position); // if refer to fields by '.' when we don't have pointers but we use '->' for refering through fields by pointers
 
 }
 
 void command_show(){
+for(int i=0;i<rows;i++){
+		for(int j=0;j<cols;j++){
+
+			display_cell(&board[i][j]);
+		}
+		printf("\n");
+	}
 
 }
 
@@ -81,7 +88,10 @@ int runtime(){
 		mines= atoi(tokens[3]);	//atoi for mines
 		 command_new();
 		}
-		if(strcmp(tokens[0],"show")==0) command_show();
+		if(strcmp(tokens[0],"show")==0){
+		 command_show();
+		}
+		
 
 
 
