@@ -21,11 +21,18 @@ int mines;
 
 void command_new(){
 
-	board =(cell **) malloc(sizeof(cell *)* rows);
+	board =(cell **) malloc(sizeof(cell *)* rows); // memory allocation for rows
 	for(int i=0;i<rows;i++){
-	board[i] = (cell *) malloc(sizeof(cell)*cols);
+	board[i] = (cell *) malloc(sizeof(cell)*cols);		// memory allocation for cols
 	}	
 
+
+	for(int i=0;i<rows;i++){
+		for(int j=0;j<cols;j++){
+
+			board[i][j].position = i*rows+ j ;	
+		}
+	}
 }
 
 void command_show(){
