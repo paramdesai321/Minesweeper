@@ -35,6 +35,12 @@ void command_new(){
 	}
 }
 
+void display_cell(cell *cell){
+
+	printf("%2d",cell->position); // if refer to fields by '.' when we don't have pointers but we use '->' for refering through fields by pointers
+
+}
+
 void command_show(){
 
 }
