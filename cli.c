@@ -21,7 +21,10 @@ int mines;
 
 void command_new(){
 
-	
+	board =(cell **) malloc(sizeof(cell *)* rows);
+	for(int i=0;i<rows;i++){
+	board[i] = (cell *) malloc(sizeof(cell)*cols);
+	}	
 
 }
 
