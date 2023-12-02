@@ -60,9 +60,9 @@ int runtime(){
 
 		if(strcmp(tokens[0],"quit") == 0) break;
 		if(strcmp(tokens[0],"new")==0){
-		rows = atoi(tokens[1]);
-		cols = atoi(tokens[2]);	
-		mines= atoi(tokens[3]);
+		rows = atoi(tokens[1]); // atoi is used to convert strings into int, this one converts the command line argument of the first index and converts it int to string
+		cols = atoi(tokens[2]);	// atoi for columns 
+		mines= atoi(tokens[3]);	//atoi for mines
 		 command_new();
 		}
 		if(strcmp(tokens[0],"show")==0) command_show();
