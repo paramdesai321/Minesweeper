@@ -91,11 +91,29 @@ void place_mine(){
 		}
 
 		minedarr[i] = board[r][c].position; 
-		printf("%d\n",minedarr[i]);
+	//	printf("%d\n",minedarr[i]);
 
 
 	}
 
+
+
+}
+
+
+void adjacencycount(int r, int c){
+
+
+int neighbourcount = 8;
+int rowneighbors[] = {-1,-1,0,1,1,1,0,-1};
+int colneighbors[] = {0,1,1,1,0,-1.-1,-1};
+
+
+for(int d=0;d<neighbourcount;d++){
+
+		int rn = r + rowneighbors[d];
+		int cn = c  + colneighbors[d];
+}
 
 
 }
