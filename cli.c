@@ -3,6 +3,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <time.h>
+# include <stdbool.h>
 struct cell{
 
 
@@ -19,6 +20,7 @@ cell **board; // 2-D array
 int rows;
 int cols;
 int mines;
+int minedarr[256];
 
 
 void command_new(){
@@ -55,9 +57,46 @@ for(int i=0;i<rows;i++){
 }
 
 
+bool mine_lookup(int row, int col){
+
+	for(int i=0;i<256;i++){
+
+		if(board[row][col].position == minedarr[i]) return true;
+
+	}
+
+	return false;
+}
+
 int get_random(int range){
 
 		return (rand()%range);
+
+}
+
+void place_mine(){
+
+
+	if(mines ==0) return;
+
+	for(int i=1;i<=mines;i++){
+
+		int r  = get_random(rows);
+		int c = get_random(cols);
+
+		while(mine_lookup(r,c) == true){
+		  
+			r=  get_random(rows);
+			c = get_random(cols);
+		}
+
+		minedarr[i] = board[r][c].position; 
+		printf("%d\n",minedarr[i]);
+
+
+	}
+
+
 
 }
 
@@ -79,7 +118,7 @@ int runtime(){
 		printf(">> ");
 		fgets(line,80,stdin);
 		line[strlen(line)-1] = '\0';
-		printf("You entered %s\n",line);
+	//	printf("You entered %s\n",line);
 
 		strcpy(linecopy,line);
 		tok = strtok(linecopy," ");
@@ -116,10 +155,9 @@ int runtime(){
 
 int main(void){
 	
-	srand(time(0));
-		int my_rand = get_random(10);
-		printf("%d\n",my_rand);
 
 //	runtime();
+	runtime();
+	place_mine();
 
 }
