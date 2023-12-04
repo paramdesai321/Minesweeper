@@ -1,8 +1,10 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
-
+# include <math.h>
+# include <time.h>
 struct cell{
+
 
 	int position;
 	int adjcount;
@@ -53,14 +55,25 @@ for(int i=0;i<rows;i++){
 }
 
 
+int get_random(int range){
+
+		return (rand()%range);
+
+}
+
+
 
 int runtime(){
+
+	 // seeding the random according to the time it runs on the computer
 
 	char line[80];
 	char linecopy[80];
 	char tokens[10][80];
 	char *tok;
 	int tokencount;
+	int ranom  = get_random(10);
+	
 
 	while(1){
 		printf(">> ");
@@ -78,9 +91,9 @@ int runtime(){
 			tokencount++;
 
 		}
-		printf("Total tokens %d\n",tokencount);
-		printf("name command = %s\n", tokens[0]);
-
+//		printf("Total tokens %d\n",tokencount);
+//		printf("name command = %s\n", tokens[0]);
+		
 		if(strcmp(tokens[0],"quit") == 0) break;
 		if(strcmp(tokens[0],"new")==0){
 		rows = atoi(tokens[1]); // atoi is used to convert strings into int, this one converts the command line argument of the first index and converts it int to string
@@ -102,7 +115,11 @@ int runtime(){
 }
 
 int main(void){
+	
+	srand(time(0));
+		int my_rand = get_random(10);
+		printf("%d\n",my_rand);
 
-	runtime();
+//	runtime();
 
 }
