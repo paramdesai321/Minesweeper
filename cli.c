@@ -160,9 +160,30 @@ void command_new(){
 	adjacencycount();
 }
 
+
+
+void uncover_recursive(int r, int c){
+int neighbourcount = 8;
+int rowneighbors[] = {-1,-1,0,1,1,1,0,-1};
+int colneighbors[] = {0,1,1,1,0,-1.-1,-1};
+
+if(board[r][c].adjcount ==0){
+
+	//for()
+
+}
+
+else if(board[r][c].adjcount >0 && board[r][c].mined ==0){
+		// uncover that cell
+}
+
+else printf("Game is over, you lost!");
+
+
+}
 int runtime(){
 
-	 // seeding the random according to the time it runs on the computer
+	 // seeding the random according to the  it runs on the computer
 
 	char line[80];
 	char linecopy[80];
