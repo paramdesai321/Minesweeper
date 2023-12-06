@@ -37,6 +37,8 @@ void command_new(){
 			board[i][j].position = i*rows+ j;
 		}
 	}
+	place_mine();
+	adjacencycount();
 }
 
 void display_cell(cell *cell){
@@ -91,6 +93,7 @@ void place_mine(){
 		}
 
 		minedarr[i] = board[r][c].position; 
+		board[r][c].mined = 1; 
 	//	printf("%d\n",minedarr[i]);
 
 
@@ -101,7 +104,7 @@ void place_mine(){
 }
 
 
-void adjacencycount(int r, int c){
+void adjacencycount(){
 
 
 int neighbourcount = 8;
@@ -109,11 +112,22 @@ int rowneighbors[] = {-1,-1,0,1,1,1,0,-1};
 int colneighbors[] = {0,1,1,1,0,-1.-1,-1};
 
 
-for(int d=0;d<neighbourcount;d++){
+for(int i=0;i<rows;i++){
+	for(int j=0;j<cols;j++){
+		for(int d=0;d<neighbourcount;d++){
 
 		int rn = r + rowneighbors[d];
+		printf("%2d\n", rows);
 		int cn = c  + colneighbors[d];
+		printf("%3d\n",cols);
+		}
+	}
+
+		
+
 }
+
+
 
 
 }
@@ -176,6 +190,7 @@ int main(void){
 
 //	runtime();
 	runtime();
+	adjacencycount(2,2);
 	place_mine();
 
 }
