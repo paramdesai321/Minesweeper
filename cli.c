@@ -28,7 +28,9 @@ int minedarr[256];
 void display_cell(cell *cell){
 
 	printf("%4d",cell->position); // if refer to fields by '.' when we don't have pointers but we use '->' for refering through fields by pointers
-
+	if(cell->mined == 1) printf("%2s","*");
+	else if(cell->adjcount==0) printf("%2s",".");	
+	else printf("%2d",cell->adjcount);
 }
 
 void command_show(){
@@ -112,13 +114,14 @@ for(int i=0;i<rows;i++){
 		
 		}
 		board[i][j].adjcount = minecount;
-		printf("%d\n",board[i][j].adjcount);
+
 	}		
 
 }
 
 
 }
+
 
 
 void command_new(){
@@ -194,7 +197,6 @@ int main(void){
 
 //	runtime();
 	runtime();
-	adjacencycount();
-	place_mine();
+	display_cell();
 
 }
