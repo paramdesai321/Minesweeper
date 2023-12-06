@@ -25,6 +25,9 @@ int minedarr[256];
 
 
 
+
+
+
 void display_cell(cell *cell){
 
 	printf("%4d",cell->position); // if refer to fields by '.' when we don't have pointers but we use '->' for refering through fields by pointers
@@ -122,7 +125,13 @@ for(int i=0;i<rows;i++){
 
 }
 
+void command_flag(int row, int col){
 
+	if(board[row][col].flagged == 0){
+		board[row][col].flagged = 1;
+	}
+	else printf("Cell %d has already been flagged",board[row][col].position);
+}
 
 void command_new(){
 
@@ -197,6 +206,7 @@ int main(void){
 
 //	runtime();
 	runtime();
-	display_cell();
+//	display_cell();
 
 }
+
