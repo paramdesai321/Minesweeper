@@ -20,26 +20,10 @@ cell **board; // 2-D array
 int rows;
 int cols;
 int mines;
+
 int minedarr[256];
 
 
-void command_new(){
-
-	board =(cell **) malloc(sizeof(cell *)* rows); // memory allocation for rows
-	for(int i=0;i<rows;i++){
-	board[i] = (cell *) malloc(sizeof(cell)*cols);		// memory allocation for cols
-	}	
-
-
-	for(int i=0;i<rows;i++){
-		for(int j=0;j<cols;j++){
-
-			board[i][j].position = i*rows+ j;
-		}
-	}
-	place_mine();
-	adjacencycount();
-}
 
 void display_cell(cell *cell){
 
@@ -94,6 +78,7 @@ void place_mine(){
 
 		minedarr[i] = board[r][c].position; 
 		board[r][c].mined = 1; 
+
 	//	printf("%d\n",minedarr[i]);
 
 
@@ -114,25 +99,45 @@ int colneighbors[] = {0,1,1,1,0,-1.-1,-1};
 
 for(int i=0;i<rows;i++){
 	for(int j=0;j<cols;j++){
+		int minecount  = 0;
 		for(int d=0;d<neighbourcount;d++){
+		int rn = i+ rowneighbors[d];
+		//printf("%2d\n", rows);
+		int cn = j  + colneighbors[d];
+		//printf("%3d\n",cols); 
 
-		int rn = r + rowneighbors[d];
-		printf("%2d\n", rows);
-		int cn = c  + colneighbors[d];
-		printf("%3d\n",cols);
+		if(0<= rn && rn<rows && 0<=cn && cn<cols){
+			if(board[rn][cn].mined == 1) minecount++;
+		}
+		
+		}
+		board[i][j].adjcount = minecount;
+		printf("%d\n",board[i][j].adjcount);
+	}		
+
+}
+
+
+}
+
+
+void command_new(){
+
+	board =(cell **) malloc(sizeof(cell *)* rows); // memory allocation for rows
+	for(int i=0;i<rows;i++){
+	board[i] = (cell *) malloc(sizeof(cell)*cols);		// memory allocation for cols
+	}	
+
+
+	for(int i=0;i<rows;i++){
+		for(int j=0;j<cols;j++){
+
+			board[i][j].position = i*rows+ j;
 		}
 	}
-
-		
-
+	place_mine();
+	adjacencycount();
 }
-
-
-
-
-}
-
-
 
 int runtime(){
 
@@ -178,7 +183,6 @@ int runtime(){
 		
 
 
-
 	}
 
 
@@ -190,7 +194,7 @@ int main(void){
 
 //	runtime();
 	runtime();
-	adjacencycount(2,2);
+	adjacencycount();
 	place_mine();
 
 }
