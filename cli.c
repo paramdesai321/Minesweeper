@@ -133,6 +133,15 @@ void command_flag(int row, int col){
 	else printf("Cell %d has already been flagged",board[row][col].position);
 }
 
+void command_unflag(int row, int col){
+
+	if(board[row][col].flagged == 1){
+		board[row][col].flagged = 0;
+	}
+	else printf("Cell %d is already unflagged",board[row][col].position);
+}
+
+
 void command_new(){
 
 	board =(cell **) malloc(sizeof(cell *)* rows); // memory allocation for rows
@@ -160,7 +169,7 @@ int runtime(){
 	char tokens[10][80];
 	char *tok;
 	int tokencount;
-	int ranom  = get_random(10);
+	int ranom  = get_random(10); 
 	
 
 	while(1){
