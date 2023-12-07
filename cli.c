@@ -20,17 +20,12 @@ cell **board; // 2-D array
 int rows;
 int cols;
 int mines;
-
-int minedarr[256];
-
-
-
-
+int minedarr[30];
 
 
 void display_cell(cell *cell){
 
-	printf("%4d",cell->position); // if refer to fields by '.' when we don't have pointers but we use '->' for refering through fields by pointers
+	// if refer to fields by '.' when we don't have pointers but we use '->' for refering through fields by pointers
 	if(cell->mined == 1) printf("%2s","*");
 	else if(cell->adjcount==0) printf("%2s",".");	
 	else printf("%2d",cell->adjcount);
@@ -50,7 +45,7 @@ for(int i=0;i<rows;i++){
 
 bool mine_lookup(int row, int col){
 
-	for(int i=0;i<256;i++){
+	for(int i=0;i<30;i++){
 
 		if(board[row][col].position == minedarr[i]) return true;
 
@@ -116,8 +111,7 @@ for(int i=0;i<rows;i++){
 		}
 		
 		}
-		board[i][j].adjcount = minecount;
-
+		board[i][j].adjcount = minecount; // there is somehting that sht obe
 	}		
 
 }
@@ -130,15 +124,18 @@ void command_flag(int row, int col){
 	if(board[row][col].flagged == 0){
 		board[row][col].flagged = 1;
 	}
-	else printf("Cell %d has already been flagged",board[row][col].position);
+	else printf("Cell %d has already been flagged\n",board[row][col].position);
 }
+
+
 
 void command_unflag(int row, int col){
 
 	if(board[row][col].flagged == 1){
 		board[row][col].flagged = 0;
+		
 	}
-	else printf("Cell %d is already unflagged",board[row][col].position);
+	else printf("Cell %d is already unflagged\n",board[row][col].position);
 }
 
 
@@ -154,6 +151,7 @@ void command_new(){
 		for(int j=0;j<cols;j++){
 
 			board[i][j].position = i*rows+ j;
+			display_cell(board[i]);
 		}
 	}
 	place_mine();
@@ -169,7 +167,18 @@ int colneighbors[] = {0,1,1,1,0,-1.-1,-1};
 
 if(board[r][c].adjcount ==0){
 
-	//for()
+	for(int d=0;d<8;d++){
+			int rn = r + rowneighbors[d];
+			int cn = c + colneighbors[d];
+			if(0<=rn && rn<rows && 0<=cn && cn<cols){
+
+					if(board[rn][cn].covered ==1){
+
+						uncover_recursive(rn,cn);
+					}
+			}
+	}
+
 
 }
 
@@ -177,7 +186,7 @@ else if(board[r][c].adjcount >0 && board[r][c].mined ==0){
 		// uncover that cell
 }
 
-else printf("Game is over, you lost!");
+else printf("Game is over, you lost!\n");
 
 
 }
@@ -223,6 +232,14 @@ int runtime(){
 		 command_show();
 		}
 		
+		if(strcmp(tokens[0],"uncover")== 0){
+		int	r = atoi(tokens[1]); // atoi is used to convert strings into int, this one converts the command line argument of the first index and converts it int to string
+		int c = atoi(tokens[2]);
+
+			uncover_recursive(r,c);
+		}
+
+
 
 
 	}
@@ -236,6 +253,7 @@ int main(void){
 
 //	runtime();
 	runtime();
+
 //	display_cell();
 
 }
