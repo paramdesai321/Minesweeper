@@ -187,8 +187,21 @@ else if(board[r][c].adjcount >0 && board[r][c].mined ==0){
 // uncover that cell
 }
 
+
 else printf("Game is over, you lost!\n");
 
+
+}
+
+
+void coverall(){
+
+	for(int i=0;i<rows;i++){
+		for(int j=0;j<cols;j++){
+			printf("/");
+		}
+		printf("\n");
+	}
 
 }
 int runtime(){
@@ -248,6 +261,7 @@ int c = atoi(tokens[2]);
 command_flag(r,c);
 }
 
+if(strcmp(tokens[0],"coverall")==0) coverall();
 
 
 
