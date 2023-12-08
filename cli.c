@@ -22,29 +22,28 @@ int cols;
 int mines;
 
 
-
 void display_cell(cell *cell){
-
-// if refer to fields by '.' when we don't have pointers but we use '->' for refering through fields by pointers
-if(cell->mined == 1){
-printf("%2s","*");
-}
-else if(cell->adjcount==0){
-printf("%2s",".");
-}
-else{
-printf("%2d",cell->adjcount);
-}
+		
+		// if refer to fields by '.' when we don't have pointers but we use '->' for refering through fields by pointers
+		if(cell->mined == 1){
+			printf("%2s","*");
+		}
+		else if(cell->adjcount==0){
+			printf("%2s",".");
+		}
+		else{
+			printf("%2s",cell->adjcount);
+	}
 }
 
 void command_show(){
-for(int i=0;i<rows;i++){
-for(int j=0;j<cols;j++){
-
-display_cell(&board[i][j]);
-}
-printf("\n");
-}
+	for(int i=0;i<rows;i++){
+		for(int j=0;j<cols;j++){
+	
+		display_cell(&board[i][j]);
+		}
+		printf("\n");
+	}
 
 }
 
@@ -52,7 +51,7 @@ printf("\n");
 
 int get_random(int range){
 
-return ((int)floor((float)range*rand()/RAND_MAX))%range;
+return (rand()%range);
 
 }
 
@@ -151,7 +150,7 @@ display_cell(board[i]);
 }
 }
 place_mine();
-adjacencycount();
+//adjacencycount();
 }
 
 
@@ -253,7 +252,6 @@ return 0;
 }
 
 int main(void){
-
 
 // runtime();
 runtime();
