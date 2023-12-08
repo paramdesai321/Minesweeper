@@ -22,7 +22,10 @@ int mines;
 
 void display_cell(cell *cell){
     // if refer to fields by '.' when we don't have pointers but we use '->' for referring through fields by pointers
-    if(cell->mined == 1){
+   if(cell->covered == 1) printf("%2s","/");
+   else if(cell->flagged == 1) printf("%2s","F");
+    
+    else if(cell->mined == 1){
         printf("%2s", "*");
     }
     else if(cell->adjcount == 0){
@@ -31,6 +34,7 @@ void display_cell(cell *cell){
     else{
         printf("%2d", cell->adjcount);
     }
+
 }
 
 void command_show(){
@@ -83,6 +87,12 @@ void adjacencycount(){
 }
 
 void command_flag(int row, int col){
+	if(board[row][col].covered ==0)
+	 {
+	 		printf("You can only flag a covered cell\n");
+			return;
+}
+
     if(board[row][col].flagged == 0){
         board[row][col].flagged = 1;
     }
@@ -105,8 +115,12 @@ void command_new(){
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
             board[i][j].position = i * rows + j;
-            printf("%2d\n", board[i]);
-            display_cell(board[i]);
+            board[i][j].mined =0;
+            board[i][j].adjcount=0;
+            board[i][j].covered=0;
+            board[i][j].flagged=0;
+           // printf("%2d\n", board[i]);
+           // display_cell(board[i]);
         }
     }
     place_mine();
@@ -114,12 +128,16 @@ void command_new(){
 }
 
 void uncover_recursive(int r, int c){
+  
+  if(board[r][c].mined == 0){  
+    board[r][c].covered = 0;
+
+    if(board[r][c].adjcount>0) return;
     int neighbourcount = 8;
     int rowneighbors[] = {-1, -1, 0, 1, 1, 1, 0, -1};
     int colneighbors[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
-    display_cell(&board[r][c]);
-    command_show();
+   // command_show();
     
     if(board[r][c].adjcount == 0){
         for(int d = 0; d < 8; d++){
@@ -128,22 +146,28 @@ void uncover_recursive(int r, int c){
             if(0 <= rn && rn < rows && 0 <= cn && cn < cols){
                 if(board[rn][cn].covered == 1){
                     uncover_recursive(rn, cn);
+
                 }
             }
         }
     }
-    else if(board[r][c].adjcount > 0 && board[r][c].mined == 0){
-        // uncover that cell
-    }
-    else printf("Game is over, you lost!\n");
 }
+
+else{
+	printf("Game Over, you have lost!");
+}
+}
+   
+   
+
 
 void coverall(){
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
-            printf("/");
+        	board[i][j].covered = 1;
+           
         }
-        printf("\n");
+        
     }
 }
 
@@ -169,8 +193,8 @@ int runtime(){
         while(tok != NULL){
             strcpy(tokens[tokencount], tok);
             tok = strtok(NULL, " ");
-            tokencount++;
-        }
+            tokencount++; // 
+          }
 
         if(strcmp(tokens[0], "quit") == 0) break;
         if(strcmp(tokens[0], "new") == 0){
@@ -192,7 +216,7 @@ int runtime(){
         if(strcmp(tokens[0], "flag") == 0){
             int r = atoi(tokens[1]); // atoi is used to convert strings into int, this one converts the command line argument of the first index and converts it int to string
             int c = atoi(tokens[2]);
-            command_flag(r, c);
+            command_flag(r, c); 
         }
 
         if(strcmp(tokens[0], "coverall") == 0) coverall();
