@@ -32,7 +32,7 @@ void display_cell(cell *cell){
 			printf("%2s",".");
 		}
 		else{
-			printf("%2s",cell->adjcount);
+			printf("%2d",cell->adjcount);
 	}
 }
 
@@ -136,43 +136,43 @@ else printf("Cell %d is already unflagged\n",board[row][col].position);
 
 void command_new(){
 
-board =(cell **) malloc(sizeof(cell *)* rows); // memory allocation for rows
-for(int i=0;i<rows;i++){
-board[i] = (cell *) malloc(sizeof(cell)*cols); // memory allocation for cols
-}
+	board =(cell **) malloc(sizeof(cell *)* rows); // memory allocation for rows
+	for(int i=0;i<rows;i++){
+		board[i] = (cell *) malloc(sizeof(cell)*cols); // memory allocation for cols
+	}
 
 
-for(int i=0;i<rows;i++){
-for(int j=0;j<cols;j++){
+	for(int i=0;i<rows;i++){
+		for(int j=0;j<cols;j++){
 
-board[i][j].position = i*rows+ j;
-display_cell(board[i]);
-}
-}
-place_mine();
-//adjacencycount();
+		board[i][j].position = i*rows+ j;
+		display_cell(board[i]);
+		}
+	}
+	place_mine();
+adjacencycount();
 }
 
 
 
 void uncover_recursive(int r, int c){
-int neighbourcount = 8;
-int rowneighbors[] = {-1,-1,0,1,1,1,0,-1};
-int colneighbors[] = {0,1,1,1,0,-1.-1,-1};
-
-if(board[r][c].adjcount ==0){
-
-for(int d=0;d<8;d++){
-int rn = r + rowneighbors[d];
-int cn = c + colneighbors[d];
-if(0<=rn && rn<rows && 0<=cn && cn<cols){
-
-if(board[rn][cn].covered ==1){
-
-uncover_recursive(rn,cn);
-}
-}
-}
+	int neighbourcount = 8;
+	int rowneighbors[] = {-1,-1,0,1,1,1,0,-1};
+	int colneighbors[] = {0,1,1,1,0,-1.-1,-1};
+	
+	if(board[r][c].adjcount ==0){
+	
+		for(int d=0;d<8;d++){
+			int rn = r + rowneighbors[d];
+			int cn = c + colneighbors[d];
+				if(0<=rn && rn<rows && 0<=cn && cn<cols){
+	
+					if(board[rn][cn].covered ==1){
+	
+						uncover_recursive(rn,cn);
+			}
+		}
+	}
 
 
 }
