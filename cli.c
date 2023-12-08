@@ -146,11 +146,13 @@ void command_new(){
 		for(int j=0;j<cols;j++){
 
 		board[i][j].position = i*rows+ j;
+		printf("%2d\n",board[i]);
 		display_cell(board[i]);
+
 		}
 	}
 	place_mine();
-adjacencycount();
+	adjacencycount();
 }
 
 
@@ -159,6 +161,10 @@ void uncover_recursive(int r, int c){
 	int neighbourcount = 8;
 	int rowneighbors[] = {-1,-1,0,1,1,1,0,-1};
 	int colneighbors[] = {0,1,1,1,0,-1.-1,-1};
+
+
+	display_cell(&board[r][c]);
+	command_show();
 	
 	if(board[r][c].adjcount ==0){
 	
