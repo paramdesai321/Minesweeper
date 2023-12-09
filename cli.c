@@ -94,6 +94,8 @@ void command_flag(int row, int col){
 			return;
 	  }
 
+	     
+
     if(board[row][col].flagged == 0){
         board[row][col].flagged = 1;
     }
