@@ -50,7 +50,7 @@ void command_show(){
 int get_random(int range){
     return (rand() % range);
 }
-
+  
 void place_mine(){
     if(mines == 0) return;
     
