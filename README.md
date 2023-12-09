@@ -1,4 +1,4 @@
-# Mineswepper
+# Minesweeper
 The Classic video game Minesweeper in C.
 
 This is what the game looks like:
