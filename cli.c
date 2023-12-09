@@ -199,7 +199,10 @@ int runtime(){
             tokencount++; // 
           }
 
-        if(strcmp(tokens[0], "quit") == 0) break;
+        if(strcmp(tokens[0], "quit") == 0) { 
+        			printf("Bye!");
+        			break;
+        	}		
         if(strcmp(tokens[0], "new") == 0){
             rows = atoi(tokens[1]); // atoi is used to convert strings into int, this one converts the command line argument of the first index and converts it int to string
             cols = atoi(tokens[2]); // atoi for columns
@@ -209,6 +212,7 @@ int runtime(){
         if(strcmp(tokens[0], "show") == 0){
             command_show();
         }
+
 
         if(strcmp(tokens[0], "uncover") == 0){
             int r = atoi(tokens[1]); // atoi is used to convert strings into int, this one converts the command line argument of the first index and converts it int to string
