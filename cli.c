@@ -86,6 +86,17 @@ void adjacencycount(){
         }
     }
 }
+bool win(){
+	for(int r = 0;r<rows;r++){
+    	for(int c=0;c<cols;c++){
+    		if(board[r][c].mined ==1 && board[r][c].flagged==0) return false;
+    		else if(board[r][c].mined ==0 && board[r][c].covered == 1) return false;
+
+    	}
+    }
+
+    return false;
+}
 
 void command_flag(int row, int col){
 	if(board[row][col].covered ==0)
@@ -93,14 +104,17 @@ void command_flag(int row, int col){
 	 		printf("You can only flag a covered cell\n");
 			return;
 	  }
-
-
-
     if(board[row][col].flagged == 0){
         board[row][col].flagged = 1;
     }
+    bool b = win();
+    if(b==true){
+    	printf("Congratulations, You have won the game!!\n");
+    	return;
+    }
     else printf("Cell %d has already been flagged\n", board[row][col].position);
 }
+
 
 void command_unflag(int row, int col){
     if(board[row][col].flagged == 1){
@@ -203,13 +217,13 @@ int runtime(){
         			printf("Bye!");
         			break;
         	}		
-        if(strcmp(tokens[0], "new") == 0){
+        if(strcmp(tokens[0], "new")== 0){
             rows = atoi(tokens[1]); // atoi is used to convert strings into int, this one converts the command line argument of the first index and converts it int to string
             cols = atoi(tokens[2]); // atoi for columns
             mines = atoi(tokens[3]); //atoi for mines
             command_new();
         }
-        if(strcmp(tokens[0], "show") == 0){
+        if(strcmp(tokens[0], "show")== 0){
             command_show();
         }
 
@@ -234,6 +248,8 @@ int runtime(){
 
         if(strcmp(tokens[0], "coverall") == 0) coverall();
     }
+
+
 
     return 0;
 }
