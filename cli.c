@@ -79,23 +79,22 @@ void adjacencycount(){
                 int rn = i + rowneighbors[d];
                 int cn = j + colneighbors[d];
                 if(0 <= rn && rn < rows && 0 <= cn && cn < cols){
-                    if(board[rn][cn].mined == 1) minecount++;
-                }
+                	    if(board[rn][cn].mined == 1) minecount++;
+                	}
             }
             board[i][j].adjcount = minecount;
         }
     }
 }
+
 bool win(){
 	for(int r = 0;r<rows;r++){
     	for(int c=0;c<cols;c++){
     		if(board[r][c].mined ==1 && board[r][c].flagged==0) return false;
     		else if(board[r][c].mined ==0 && board[r][c].covered == 1) return false;
-
     	}
     }
-
-    return false;
+    return true;
 }
 
 void command_flag(int row, int col){
@@ -104,15 +103,17 @@ void command_flag(int row, int col){
 	 		printf("You can only flag a covered cell\n");
 			return;
 	  }
+    if(board[row][col].flagged == 1) printf("Cell %d has already been flagged\n", board[row][col].position);
     if(board[row][col].flagged == 0){
         board[row][col].flagged = 1;
+
     }
     bool b = win();
     if(b==true){
     	printf("Congratulations, You have won the game!!\n");
     	return;
     }
-    else printf("Cell %d has already been flagged\n", board[row][col].position);
+   
 }
 
 
@@ -163,21 +164,15 @@ void uncover_recursive(int r, int c){
             if(0 <= rn && rn < rows && 0 <= cn && cn < cols){
                 if(board[rn][cn].covered == 1){
                     uncover_recursive(rn, cn);
-
                 }
             }
         }
     }
 }
-
-else{
-	printf("Game Over, you have lost!\n");
+	else{
+		printf("Game Over, you have lost!\n");
+	}
 }
-}
-   
-   
-
-
 void coverall(){
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
