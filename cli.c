@@ -157,7 +157,7 @@ void uncover_recursive(int r, int c){
 }
 
 else{
-	printf("Game Over, you have lost!");
+	printf("Game Over, you have lost!\n");
 }
 }
    
