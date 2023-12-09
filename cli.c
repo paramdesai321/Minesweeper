@@ -35,7 +35,8 @@ void display_cell(cell *cell){
         printf("%2d", cell->adjcount);
     }
 
-}
+}	
+
 
 void command_show(){
     for(int i = 0; i < rows; i++){
@@ -91,7 +92,7 @@ void command_flag(int row, int col){
 	 {
 	 		printf("You can only flag a covered cell\n");
 			return;
-}
+	  }
 
     if(board[row][col].flagged == 0){
         board[row][col].flagged = 1;
