@@ -222,6 +222,12 @@ int runtime(){
             command_flag(r, c); 
         }
 
+        if(strcmp(tokens[0],"unflag")==0){
+        	int r = atoi(tokens[1]);
+        	int c = atoi(tokens[2]);
+        	command_unflag(r,c);
+        }
+
         if(strcmp(tokens[0], "coverall") == 0) coverall();
     }
 
