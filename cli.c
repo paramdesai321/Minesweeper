@@ -22,8 +22,8 @@ int mines;
 
 void display_cell(cell *cell){
     // if refer to fields by '.' when we don't have pointers but we use '->' for referring through fields by pointers
-   if(cell->covered == 1) printf("%2s","/");
-   else if(cell->flagged == 1) printf("%2s","F");
+   if(cell->flagged == 1) printf("%2s","F");
+   else if(cell->covered == 1) printf("%2s","/");
     
     else if(cell->mined == 1){
         printf("%2s", "*");
@@ -94,7 +94,7 @@ void command_flag(int row, int col){
 			return;
 	  }
 
-	     
+
 
     if(board[row][col].flagged == 0){
         board[row][col].flagged = 1;
