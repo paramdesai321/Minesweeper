@@ -123,7 +123,7 @@ void command_flag(int row, int col){
     
     int result = win();
     if(result == 1){
-    	printf("You Won!!\n"); 
+    	printf("Game Over,You have won!!\n"); 
 
     }
    
