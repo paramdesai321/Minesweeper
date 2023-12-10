@@ -20,6 +20,7 @@ int rows;
 int cols;
 int mines;
 
+
 void display_cell(cell *cell){
     // if refer to fields by '.' when we don't have pointers but we use '->' for referring through fields by pointers
    if(cell->flagged == 1) printf("%2s","F");
@@ -91,11 +92,11 @@ int win(){
     for(int r = 0; r < rows; r++){
         for(int c = 0; c < cols; c++){
             if(board[r][c].mined == 1 && board[r][c].flagged == 0) {
-            	printf("false\n");
+            //	printf("false\n");
                 return 0;
             }
             else if(board[r][c].mined == 0 && board[r][c].covered == 1) {
-            	printf("false\n");
+            //	printf("false\n");
                 return 0;
             }
         }
@@ -122,7 +123,8 @@ void command_flag(int row, int col){
     
     int result = win();
     if(result == 1){
-    	printf("You Won!!\n");
+    	printf("You Won!!\n"); 
+
     }
    
 }
@@ -193,6 +195,7 @@ void coverall(){
         
     }
 }
+
 
 int runtime(){
     srand(time(0));
