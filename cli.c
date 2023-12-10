@@ -88,31 +88,48 @@ void adjacencycount(){
 }
 
 bool win(){
-	for(int r = 0;r<rows;r++){
-    	for(int c=0;c<cols;c++){
-    		if(board[r][c].mined ==1 && board[r][c].flagged==0) return false;
-    		else if(board[r][c].mined ==0 && board[r][c].covered == 1) return false;
-    	}
+    for(int r = 0; r < rows; r++){
+        for(int c = 0; c < cols; c++){
+            if(board[r][c].mined == 1 && board[r][c].flagged == 0) {
+            	printf("false\n");
+                return false;
+            }
+            else if(board[r][c].mined == 0 && board[r][c].covered == 1) {
+            	printf("false\n");
+                return false;
+            }
+        }
     }
     return true;
 }
 
+
 void command_flag(int row, int col){
 	if(board[row][col].covered ==0)
-	 {
+		 {
 	 		printf("You can only flag a covered cell\n");
 			return;
 	  }
     if(board[row][col].flagged == 1) printf("Cell %d has already been flagged\n", board[row][col].position);
+
     if(board[row][col].flagged == 0){
         board[row][col].flagged = 1;
 
     }
-    bool b = win();
-    if(b==true){
-    	printf("Congratulations, You have won the game!!\n");
-    	return;
+    bool b = true;
+    for(int r = 0; r < rows; r++){
+        for(int c = 0; c < cols; c++){
+            if(board[r][c].mined == 1 && board[r][c].flagged == 0) {
+            	//printf("false\n");
+                b =false;
+            }
+            else if(board[r][c].mined == 0 && board[r][c].covered == 1) {
+            	//printf("false\n");
+                b=false;
+            }
+        }
     }
+    if(b ==true) printf("You won!\n");
    
 }
 
